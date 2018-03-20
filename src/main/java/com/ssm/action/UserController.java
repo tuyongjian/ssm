@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,8 +41,12 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping(value="/test",method= RequestMethod.GET)
-    public String test(ModelMap model){
-        return "/WEB-INF/view/test.ftl";
+    @RequestMapping(value="/queryById",method= RequestMethod.POST)
+    public @ResponseBody List<User> queryById(ModelMap model,
+                   @RequestParam(value = "age")int age){
+        Map<String,Object> map  = new HashMap<String,Object>();
+        map.put("age",age);
+        List<User> list =  userService.getList(map);
+        return list;
     }
 }

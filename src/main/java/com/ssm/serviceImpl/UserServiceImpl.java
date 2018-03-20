@@ -22,4 +22,8 @@ public class UserServiceImpl implements IUserService {
     public List<User> getList(Map<String, Object> map) {
         return userDao.queryList(map);
     }
+
+    public User getUser(int id){
+        return userDao.selectByPrimaryKey(id);
+    }
 }

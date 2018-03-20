@@ -2,6 +2,7 @@ package com.ssm.dao;
 
 import com.ssm.model.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 import java.util.Map;
 
@@ -11,4 +12,6 @@ import java.util.Map;
 public interface UserDao {
 
     public List<User> queryList(Map<String, Object> map);
+
+    public User selectByPrimaryKey(int id);
 }

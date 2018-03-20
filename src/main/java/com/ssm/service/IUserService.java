@@ -15,4 +15,6 @@ public interface IUserService {
 
     public List<User> getList(Map<String, Object> map);
 
+    public User getUser(int id);
+
 }
