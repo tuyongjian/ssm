@@ -29,20 +29,19 @@ public class UserController {
 
     @RequestMapping(value="/index",method= RequestMethod.GET)
     public String index(ModelMap model,
-                       @RequestParam(value = "id")String id){
+                       @RequestParam(value = "age")int age){
 
         Map<String,Object> map  = new HashMap<String,Object>();
-        map.put("id",id);
+        map.put("age",age);
         List<User> list =  userService.getList(map);
 
         logger.info(list.toString());
-        model.addAttribute("user", list);
+        model.addAttribute("list", list);
         return "index";
     }
 
     @RequestMapping(value="/test",method= RequestMethod.GET)
     public String test(ModelMap model){
-
-        return "test";
+        return "/WEB-INF/view/test.ftl";
     }
 }

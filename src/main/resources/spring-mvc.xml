@@ -78,7 +78,6 @@
         <property name="ignoreAcceptHeader" value="true"></property>
     </bean>
 
-
     <!--jsp视图解析器-->
     <!-- 定义跳转的文件的前后缀 ，视图模式配置 这里只能返回jsp类型的页面-->
     <!-- suffix 可以写jsp 也可以写html-->
@@ -89,38 +88,36 @@
           变成一个 可用的url地址 这里的地址要写成全路径，不然会报404错误哦&ndash;&gt;
         <property name="prefix" value="/WEB-INF/view/" />
         <property name="suffix" value=".jsp" />
-        <property name="order" value="0" />
+        <property name="order" value="1" />
     </bean>-->
 
-    <!-- 针对freemarker的视图配置 -->
-    <bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="order" value="1" />
-        <property name="suffix" value=".ftl" />
-        <property name="contentType" value="text/html;charset=utf-8" />
+
+    <!-- 设置freeMarker的配置文件路径 -->
+    <bean id="freemarkerConfiguration"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <!--注释掉的下方代码是指引freemarker的基本信息的配置位置，
+        因为将配置信息移到了applicationContext文件下，
+        所以这里就没必要存在了，不注释也不会有问题的 -->
+        <!--<property name="location" value="classpath:/WEB-INF/config/freemarker.properties" />-->
+    </bean>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
         <property name="viewClass">
             <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView</value>
         </property>
-        <property name="requestContextAttribute" value="rc" />
-    </bean>
+        <property name="cache"><value>true</value></property>
 
-    <!-- freemaker配置 -->
-    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath">
-            <value>/views/</value>
-        </property>
-        <property name="freemarkerSettings"><!-- 设置FreeMarker环境属性 -->
-            <props>
-                <prop key="template_update_delay">5</prop><!--刷新模板的周期，单位为秒 -->
-                <prop key="default_encoding">UTF-8</prop><!--模板的编码格式 -->
-                <prop key="locale">UTF-8</prop><!-- 本地化设置 -->
-                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
-                <prop key="time_format">HH:mm:ss</prop>
-                <prop key="number_format">0.####</prop>
-                <prop key="boolean_format">true,false</prop>
-                <prop key="whitespace_stripping">true</prop>
-                <prop key="tag_syntax">auto_detect</prop>
-                <prop key="url_escaping_charset">UTF-8</prop>
-            </props>
+        <!--这里需要注意一下，我注释了下面这样一行代码，
+        这行代码的意思就是指引freemarker需要解析的文件的位置。注释掉原因是因为
+         applicationContext.xml里有这样一行代码：<property name="templateLoaderPath"
+         value="/WEB-INF/views/" /> 已经指定了视图位置。如果我们这里依然保留下方代码，
+         页面回报406的找不到的错误 -->
+        <!--<property name="prefix"><value>/WEB-INF/views/</value></property>-->
+        <property name="suffix"><value>.html</value></property>
+        <property name="contentType">
+            <value>text/html; charset=UTF-8</value>
         </property>
     </bean>
 

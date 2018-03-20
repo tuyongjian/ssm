@@ -13,7 +13,7 @@
     </sql>
 
     <select id="queryList" parameterType="map" resultMap="UserResultMap">
-        SELECT * FROM user_t where id=#{id,jdbcType=INTEGER}
+        SELECT * FROM user_t where age=#{age,jdbcType=INTEGER}
     </select>
 
     <select id="selectByPrimaryKey" resultMap="UserResultMap" parameterType="java.lang.Integer" >
