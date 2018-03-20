@@ -28,7 +28,7 @@ public class UserController {
     private IUserService userService;
 
     @RequestMapping(value="/index",method= RequestMethod.GET)
-    public String test(ModelMap model,
+    public String index(ModelMap model,
                        @RequestParam(value = "id")String id){
 
         Map<String,Object> map  = new HashMap<String,Object>();
@@ -38,5 +38,11 @@ public class UserController {
         logger.info(list.toString());
         model.addAttribute("user", list);
         return "index";
+    }
+
+    @RequestMapping(value="/test",method= RequestMethod.GET)
+    public String test(ModelMap model){
+
+        return "test";
     }
 }
