@@ -1,0 +1,12 @@
+.form_div ,.title_h2{
+    width: 500px;
+    margin: 0 auto;
+}
+.h1{
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.body{
+    background: url("../../static/images/bg3.jpg");
+}
