@@ -14,4 +14,6 @@ public interface UserDao {
     public List<User> queryList(Map<String, Object> map);
 
     public User selectByPrimaryKey(int id);
+
+    public int insert(User user);
 }

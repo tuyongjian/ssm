@@ -29,16 +29,24 @@ public class UserController {
     private IUserService userService;
 
     @RequestMapping(value="/index",method= RequestMethod.GET)
-    public String index(ModelMap model,
-                       @RequestParam(value = "age")int age){
-
-        Map<String,Object> map  = new HashMap<String,Object>();
-        map.put("age",age);
-        List<User> list =  userService.getList(map);
-
-        logger.info(list.toString());
-        model.addAttribute("list", list);
+    public String index(ModelMap model){
         return "index";
+    }
+
+    @RequestMapping(value="/test",method= RequestMethod.GET)
+    public String test(ModelMap model){
+        return "test";
+    }
+
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public void register(ModelMap model,
+                           @RequestParam(value="userName")String userName,
+                           @RequestParam(value = "password")String password){
+        User user = new User();
+        user.setUserName(userName);
+        user.setPassword(password);
+        this.userService.addUser(user);
+        model.addAttribute("success","true");
     }
 
     @RequestMapping(value="/queryById",method= RequestMethod.POST)

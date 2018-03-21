@@ -1,10 +1,58 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- CSS -->
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/supersized.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
 <body>
-<h2>Hello World!</h2>
-<#list list as user>
-${user.id}<br/>
-</#list>
-姓名：<input type="text" name="name" value="name"/>
-密码：<input type="password" name="password" value="password">
+<div class="page-container">
+    <h1>Login</h1>
+        <input type="text" name="userName" class="username" placeholder="Username"><br>
+        <input type="password" name="password" class="password" placeholder="Password"><br>
+        <button class="sign">Sign me in</button><br>
+        <button class="register">register</button><br>
+        <div class="error"><span>+</span></div>
+</div>
+<script src="../assets/js/jquery-1.8.2.min.js"></script>
+<script src="../assets/js/supersized.3.2.7.min.js"></script>
+<script src="../assets/js/supersized-init.js"></script>
+<script src="../assets/js/scripts.js"></script>
+<script>
+$(".sign").on("click",function () {
+    console.log(123);
+})
+
+$(".register").on("click",function () {
+    $.ajax({
+        dataType:'json',
+        type:'post',
+        url:'../user/register.json',
+        data:{
+            userName:$('input[name="userName"]').val(),
+            password:$('input[name="password"]').val()
+        },
+        success:function (data) {
+            console.log(data.success);
+        }
+    })
+})
+
+</script>
 </body>
+
 </html>
+
