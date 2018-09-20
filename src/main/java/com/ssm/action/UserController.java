@@ -49,6 +49,15 @@ public class UserController {
         model.addAttribute("success","true");
     }
 
+    @RequestMapping(value="/query",method= RequestMethod.POST)
+    public @ResponseBody User queryById(ModelMap model){
+        User user = new User();
+        user.setUserName("test");
+        user.setPassword("123");
+        user.setAge(1);
+        return user;
+    }
+
     @RequestMapping(value="/queryById",method= RequestMethod.POST)
     public @ResponseBody List<User> queryById(ModelMap model,
                    @RequestParam(value = "age")int age){
