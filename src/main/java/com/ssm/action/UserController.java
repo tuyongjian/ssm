@@ -1,5 +1,6 @@
 package com.ssm.action;
 
+import com.ssm.exception.CustomException;
 import com.ssm.model.User;
 import com.ssm.service.IUserService;
 import org.slf4j.Logger;
@@ -50,17 +51,18 @@ public class UserController {
     }
 
     @RequestMapping(value="/query",method= RequestMethod.POST)
-    public @ResponseBody User queryById(ModelMap model){
+    public @ResponseBody User queryById(ModelMap model) throws Exception {
         User user = new User();
         user.setUserName("test");
         user.setPassword("123");
         user.setAge(1);
-        return user;
+        throw new CustomException("1111");
+       // return user;
     }
 
     @RequestMapping(value="/queryById",method= RequestMethod.POST)
     public @ResponseBody List<User> queryById(ModelMap model,
-                   @RequestParam(value = "age")int age){
+                   @RequestParam(value = "age")int age) throws Exception {
         Map<String,Object> map  = new HashMap<String,Object>();
         map.put("age",age);
         List<User> list =  userService.getList(map);

@@ -110,4 +110,7 @@
         </property>
     </bean>
 
+
+    <!-- 异常处理器-->
+    <bean class="com.ssm.exception.CustomExceptionResolver"/>
 </beans>
